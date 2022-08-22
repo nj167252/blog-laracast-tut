@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Post;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,13 +17,33 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+
+    // Track Database queries
+    // \Illuminate\Support\Facades\DBEvent::listen(function ($query)
+    // {
+    //     logger($query->sql, $query->bindings);
+    // });
+
     return view('posts', [
-        'posts' => Post::all()
+        'posts' => Post::latest()->with('author', 'category')->get(), // ->with('','') will eager load data related to each post
+        'categories' => Category::all()
     ]);
 });
 
-Route::get('posts/{post)', function ($id) {
+Route::get('posts/{post:slug}', function (Post $post) {
     return view('post', [
-        'post' => Post::findOrFail($id)
+        'post' => $post
+    ]);
+});
+
+Route::get('categories/{category:slug}', function (Category $category) {
+    return view('posts', [
+        'posts' => $category->posts->load(['category', 'author']) // eager loading relationships on exsisting model
+    ]);
+});
+
+Route::get('author/{author:username}', function (User $author) {
+    return view('posts', [
+        'posts' => $author->posts->load(['category', 'author']) // eager loading relationships on exsisting model
     ]);
 });

@@ -12,7 +12,7 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Laracasts - Jeffrey Way
+## Laracasts
 
 - [Laravel 8 From Scratch](https://laracasts.com/series/laravel-8-from-scratch) - Jeffrey Way
 
