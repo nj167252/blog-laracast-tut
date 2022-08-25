@@ -11,6 +11,15 @@ class Post extends Model
 
     // protected $with = ['category', 'author']; // this defaults to eager loading on every post request
 
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function($query, $search) {
+            $query
+                ->where('title', 'like', '%' . $search . '%')
+                ->orWhere('body', 'like', '%' . $search . '%');
+        });
+    }
+
     protected $guarded = [];
 
     public function category()
