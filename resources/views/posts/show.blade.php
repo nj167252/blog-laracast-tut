@@ -1,25 +1,6 @@
 <x-layout>
 
-    @include('_post-header')
-
-    {{-- @section('content') --}}
-        {{-- <article>
-            <h1>
-                {{ $post->title }}
-            </h1>
-
-            <p>
-                By <a href="/author/{{ $post->author->username }}">{{ $post->author->name }}</a> in <a href="/categoris/{{ $post->category->slug }}">{{ $post->category->name }}</a>
-            </p>
-
-            <div>
-                {{ $post->body }}
-            </div>
-        </article>
-
-        <a href="/">Go Back</a> --}}
-    {{-- @endsection --}}
-
+    @include('posts._header')
     
     <section class="px-6 py-8">
         <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
@@ -35,7 +16,7 @@
                         <img src="/images/lary-avatar.svg" alt="Lary avatar">
                         <div class="ml-3 text-left">
                             <h5 class="font-bold">
-                                <a href="/author/{{ $post->author->username }}">
+                                <a href="/?author={{ $post->author->username }}">
                                     {{ $post->author->name }}
                                 </a>
                             </h5>
