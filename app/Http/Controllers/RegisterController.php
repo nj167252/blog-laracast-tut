@@ -25,8 +25,6 @@ class RegisterController extends Controller
 
         auth()->login($user);
 
-        // session()->flash('success', 'Your account have been created.');
-
         return redirect('/')->with('success', 'Your account have been created.');
     }
 }

@@ -58,14 +58,7 @@
                     {{-- <a href="/forgotpassword" class="text-xs font-bold text-gray-600 uppercase mx-3">Forgot Password</a> --}}
                     <a href="/register" class="text-xs font-bold text-gray-600 uppercase mx-3">Register</a>
                 </div>
-
-                {{-- @if ($errors->any())
-                    <ul class="mt-10">
-                        @foreach ($errors->all() as $error)
-                            <li class="text-red-500 text-xs">{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                @endif --}}
+                
             </form>
         </main>
     </section>

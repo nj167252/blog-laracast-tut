@@ -53,7 +53,63 @@
                         {!! $post->body !!}
                     </div>
                 </div>
+
+                <section class="col-span-8 col-start-5 mt-10 space-y-6">
+
+                    <x-panel>
+                        <header class="flex items-center">
+                            @auth
+                                <img src="https://i.pravatar.cc/40" alt="User Avatar Imager" width="40" height="40" class="rounded-full mr-4">
+                            @endauth
+                            <h2 class="">
+                                Want to participate?
+                                @guest
+                                    <a href="/register" class="text-xs text-blue-500 font-bold uppercase">Register</a> / 
+                                    <a href="/login" class="text-xs text-blue-500 font-bold uppercase">Login</a>
+                                @endguest
+                            </h2>
+                        </header>
+
+                        @auth
+                            <form action="/posts/{{ $post->slug }}/comments" method="post" class="">
+                                @csrf
+
+
+                                <div class="mt-6">
+
+                                    <textarea 
+                                        class="w-full p-2 focus:outline-none focus:ring rounded-xl placeholder-gray-200 font-semibold text-sm border border-gray-200"
+                                        name="body" 
+                                        id="" 
+                                        rows="5"
+                                        placeholder="Quick, think of something!"
+                                        required></textarea>
+                                    @error('body')
+                                        <p class="mt-1 text-red-500 text-xs">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                
+                                <div class="flex justify-end mt-6">
+                                    <button
+                                        class="bg-blue-400 text-white rounded-xl py-2 px-4 border border-blue-500 hover:bg-blue-500" 
+                                        type="submit">
+                                        Post Comment
+                                    </button>
+                                </div>
+                            </form>
+                        @endauth
+                    </x-panel>
+                    
+                    @foreach ($post->comments as $comment)
+
+                        <x-post-comment :comment="$comment"/>
+
+                    @endforeach
+
+                </section>
+
             </article>
+
         </main>
     </section>
 

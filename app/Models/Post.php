@@ -42,15 +42,13 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function comments()
+    {        
+        return $this->hasMany(Comment::class);
+    }
+
     public function author()
     {        
         return $this->belongsTo(User::class, 'user_id');
     }
-
-    // Laravel uses id to find individual posts
-    // This will allow you to bypass that in favor of a unique slug
-    // public function getRouteKeyName()
-    // {
-    //     return 'slug';
-    // }
 }
