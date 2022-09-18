@@ -4,6 +4,7 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NewsletterController;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
@@ -30,6 +31,8 @@ Route::get('author/{author:username}', function (User $author) {
         'posts' => $author->posts,
     ]);
 });
+
+Route::post('newsletter', NewsletterController::class); //single action controllers
 
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
