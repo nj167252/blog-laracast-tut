@@ -7,4 +7,5 @@
 @endphp
 
 <a {{ $attributes([ 'class' => $classes]) }}
-    >{{ $slot }}</a>
+    >{{ $slot }}
+</a>

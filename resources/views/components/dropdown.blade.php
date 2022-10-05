@@ -3,7 +3,7 @@
 <div 
     x-data="{ show: false }" 
     @click.away="show = false"
-    class="">
+    class="relative">
 
     {{-- Links --}}
     <div @click="show = !show">
