@@ -35,12 +35,15 @@ Route::get('author/{author:username}', function (User $author) {
 
 Route::post('newsletter', NewsletterController::class); //single action controllers
 
-Route::get('admin/posts', [AdminPostController::class, 'index'])->middleware('admin');
-Route::get('admin/posts/create', [AdminPostController::class, 'create'])->middleware('admin');
-Route::post('admin/posts/store', [AdminPostController::class, 'store'])->middleware('admin');
-Route::get('admin/posts/{post}/edit', [AdminPostController::class, 'edit'])->middleware('admin');
-Route::patch('admin/posts/{post}', [AdminPostController::class, 'update'])->middleware('admin');
-Route::delete('admin/posts/{post}', [AdminPostController::class, 'destroy'])->middleware('admin');
+Route::middleware('can:admin')->group(function () {
+    Route::resource('admin/posts', AdminPostController::class)->except('show');
+    // Route::get('admin/posts', [AdminPostController::class, 'index']);
+    // Route::get('admin/posts/create', [AdminPostController::class, 'create']);
+    // Route::post('admin/posts/store', [AdminPostController::class, 'store']);
+    // Route::get('admin/posts/{post}/edit', [AdminPostController::class, 'edit']);
+    // Route::patch('admin/posts/{post}', [AdminPostController::class, 'update']);
+    // Route::delete('admin/posts/{post}', [AdminPostController::class, 'destroy']);
+});
 
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
